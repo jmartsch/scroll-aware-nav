@@ -24,6 +24,10 @@
         "preview": "vite preview",
         "lint": "eslint src --ext .ts",
         "format": "prettier --write \"src/**/*.{ts,css}\"",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:ui": "vitest --ui",
+        "test:coverage": "vitest run --coverage",
         "prepublishOnly": "bun run build",
         "prepare": "bun run build",
         "release:patch": "npm version patch && npm publish --tag beta && git push --follow-tags",
@@ -55,16 +59,20 @@
     },
     "license": "MIT",
     "devDependencies": {
+        "@types/eslint": "^8.56.12",
         "@types/node": "^20.19.15",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
+        "@vitest/ui": "^3.2.4",
         "eslint": "^8.57.1",
+        "happy-dom": "^18.0.1",
+        "jsdom": "^27.0.0",
         "prettier": "^3.6.2",
+        "terser": "^5.44.0",
         "typescript": "^5.9.2",
         "vite": "^5.4.20",
         "vite-plugin-dts": "^3.9.1",
-        "@types/eslint": "^8.56.12",
-        "terser": "^5.44.0"
+        "vitest": "^3.2.4"
     },
     "repository": {
         "type": "git",
