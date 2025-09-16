@@ -10,18 +10,10 @@ const getPackageName = () => {
 const getPackageNameCamelCase = () => {
     try {
         return getPackageName().replace(/-./g, char => char[1].toUpperCase());
-    } catch (err) {
+    } catch {
         throw new Error("Name property in package.json is missing.");
     }
 };
-
-const fileName = {
-    es: `${getPackageName()}.es.js`,
-    cjs: `${getPackageName()}.umd.js`,
-    iife: `${getPackageName()}.iife.js`,
-};
-
-const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 
 export default defineConfig({
     base: "./",
@@ -48,6 +40,7 @@ export default defineConfig({
             external: [],
             output: {
                 globals: {},
+                exports: 'named',
             },
         },
     },

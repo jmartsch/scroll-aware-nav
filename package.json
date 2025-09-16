@@ -63,7 +63,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/jmartsch/scroll-aware-nav"
+        "url": "git+https://github.com/jmartsch/scroll-aware-nav.git"
     },
     "bugs": {
         "url": "https://github.com/jmartsch/scroll-aware-nav/issues"
