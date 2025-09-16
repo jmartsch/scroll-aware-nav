@@ -15,8 +15,10 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     private readonly tolerance: number;
     private readonly showAtBottom: boolean;
     private readonly classNames: ScrollAwareNavClassNames;
+    private readonly scrollOptions: AddEventListenerOptions;
     private scrollLast: number;
     private scrollRAF?: number;
+    private isInitialized = false;
 
     constructor(element: HTMLElement | null, options: ScrollAwareNavOptions = {}) {
         if (!isBrowser()) {
@@ -32,15 +34,16 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
         }
 
         this.element = element;
-        this.startOffset = this.getOptionOrDefault(options.startOffset, element.offsetHeight);
-        this.tolerance = this.getOptionOrDefault(options.tolerance, 8);
-        this.showAtBottom = this.getOptionOrDefault(options.showAtBottom, true);
+        this.startOffset = options.startOffset ?? element.offsetHeight;
+        this.tolerance = options.tolerance ?? 8;
+        this.showAtBottom = options.showAtBottom ?? true;
         this.classNames = {
             base: options.classNames?.base ?? 'scroll-nav',
             fixed: options.classNames?.fixed ?? 'scroll-nav--fixed',
             hidden: options.classNames?.hidden ?? 'scroll-nav--hidden'
         };
-        this.scrollLast = 0;
+        this.scrollOptions = { passive: true };
+        this.scrollLast = window.pageYOffset;
         this.init();
     }
 
@@ -64,18 +67,29 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
      * Initialisiert die Scroll-Überwachung
      */
     public init(): void {
+        if (this.isInitialized) {
+            return;
+        }
+
+        this.isInitialized = true;
         this.addClass(this.classNames.base);
-        window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+        window.addEventListener('scroll', this.handleScroll, this.scrollOptions);
     }
 
     /**
      * Entfernt die Scroll-Überwachung und alle zugehörigen Klassen
      */
     public destroy(): void {
-        window.removeEventListener('scroll', this.handleScroll.bind(this));
+        if (!this.isInitialized) {
+            return;
+        }
+
+        this.isInitialized = false;
+        window.removeEventListener('scroll', this.handleScroll, this.scrollOptions);
         this.reset();
         if (this.scrollRAF) {
             window.cancelAnimationFrame(this.scrollRAF);
+            this.scrollRAF = undefined;
         }
     }
 
@@ -116,13 +130,6 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 
     /**
-     * Gibt den Optionswert oder den Standardwert zurück
-     */
-    private getOptionOrDefault<T>(option: T | undefined, defaultValue: T): T {
-        return typeof option !== 'undefined' ? option : defaultValue;
-    }
-
-    /**
      * Behandelt das Scroll-Event mit RequestAnimationFrame für bessere Performance
      */
     private handleScroll = (): void => {
@@ -132,12 +139,14 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
 
         this.scrollRAF = window.requestAnimationFrame(() => {
             const scrollCurrent = window.pageYOffset;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            const scrollHeight = this.getScrollHeight();
 
             if (scrollCurrent <= 0) {
                 this.reset();
             } else if (
                 this.showAtBottom &&
-                window.innerHeight + scrollCurrent >= document.body.offsetHeight
+                viewportHeight + scrollCurrent >= scrollHeight - 1
             ) {
                 this.fix();
             } else if (
@@ -151,6 +160,20 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
             this.scrollRAF = undefined;
         });
     };
+
+    /**
+     * Gibt die aktuelle Dokumenthöhe zurück
+     */
+    private getScrollHeight(): number {
+        const body = document.body;
+        const html = document.documentElement;
+
+        if (!body || !html) {
+            return 0;
+        }
+
+        return Math.max(html.scrollHeight, body.scrollHeight, html.offsetHeight, body.offsetHeight);
+    }
 }
 
 // Export Typen für bessere DX

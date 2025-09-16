@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scroll Aware Nav Demo</title>
+    <title>ScrollAwareNav - Intelligent Navigation Component</title>
 
     <link rel="stylesheet" href="/src/styles.css">
     <style>
@@ -243,6 +243,49 @@
             font-size: 0.9rem;
         }
 
+        .code-block {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.9);
+            color: rgba(15, 23, 42, 0.9);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+            z-index: 2;
+        }
+
+        .copy-btn:hover {
+            background: rgba(56, 189, 248, 1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: rgba(34, 197, 94, 0.9);
+        }
+
+        .copy-btn.copied:hover {
+            background: rgba(34, 197, 94, 1);
+        }
+
         @media (max-width: 720px) {
             .header-inner {
                 flex-direction: column;
@@ -273,14 +316,14 @@
         <div class="header-inner">
             <div class="brand">
                 <div class="brand-logo">SN</div>
-                <h1>Scroll Aware Navigation</h1>
+                <h1>ScrollAwareNav</h1>
             </div>
             <nav>
-                <a href="#intro">Intro</a>
-                <a href="#benefits">Highlights</a>
+                <a href="#intro">Introduction</a>
                 <a href="#features">Features</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#contact">Kontakt</a>
+                <a href="#api">API</a>
+                <a href="#usage">Usage</a>
+                <a href="#contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -288,117 +331,210 @@
     <main class="content">
         <section id="intro" class="section">
             <div class="section-header">
-                <span>Willkommen</span>
-                <h2>Elegante Navigation, die auf Dich reagiert</h2>
+                <span>Welcome</span>
+                <h2>Intelligent Navigation that Responds to User Behavior</h2>
             </div>
-            <p>Die Scroll Aware Navigation sorgt dafür, dass Deine Besucher immer den Überblick behalten. Beim Scrollen
-                passt sie sich sanft an und bleibt dennoch leicht zugänglich – perfekt für moderne Landingpages und
-                Portfolios.</p>
-            <a class="cta" href="#contact">Jetzt mehr erfahren</a>
-        </section>
-
-        <section id="benefits" class="section">
-            <div class="section-header">
-                <span>Highlights</span>
-                <h2>Mehr Orientierung, mehr Flow</h2>
-            </div>
-            <div class="grid two">
-                <article class="card">
-                    <div class="badge">01</div>
-                    <h3>Smartes Verhalten</h3>
-                    <p>Die Navigation blendet sich beim Scrollen nach unten dezent aus und erscheint sofort wieder,
-                        sobald Nutzer nach oben scrollen.</p>
-                </article>
-                <article class="card">
-                    <div class="badge">02</div>
-                    <h3>Klare Struktur</h3>
-                    <p>Verlinke Deine wichtigsten Sektionen mit sanften Sprungmarken und führe Besucher gezielt durch
-                        Deine Inhalte.</p>
-                </article>
-                <article class="card">
-                    <div class="badge">03</div>
-                    <h3>Modernes Design</h3>
-                    <p>Transparente Glasoptik, dezente Verläufe und großzügige Abstände sorgen für ein hochwertiges UI.
-                    </p>
-                </article>
-                <article class="card">
-                    <div class="badge">04</div>
-                    <h3>In wenigen Minuten integriert</h3>
-                    <p>Dank modularer Struktur und klarer Klassen kannst Du die Navigation schnell in jedes Projekt
-                        einbauen.</p>
-                </article>
-            </div>
+            <p>ScrollAwareNav is a lightweight TypeScript utility that creates smart, responsive navigation behavior.
+                It automatically hides the navigation when users scroll down and shows it when they scroll up, providing
+                an enhanced user experience for modern web applications.</p>
+            <a class="cta" href="#usage">Get Started</a>
         </section>
 
         <section id="features" class="section">
             <div class="section-header">
-                <span>Funktionen</span>
-                <h2>Was diese Demo besonders macht</h2>
+                <span>Features</span>
+                <h2>Built for Performance and Flexibility</h2>
             </div>
             <div class="grid two">
                 <article class="card">
-                    <h3>ScrollAwareNav</h3>
-                    <p>Eine kleine Utility, die den Header anhand von Scrollrichtung ein- oder ausblendet und auf Wunsch
-                        am unteren Seitenende sichtbar hält.</p>
+                    <div class="badge">TypeScript</div>
+                    <h3>Type-Safe Development</h3>
+                    <p>Written in TypeScript with full type definitions, ensuring better development experience and
+                        fewer runtime errors.</p>
                 </article>
                 <article class="card">
-                    <h3>Flexible Konfiguration</h3>
-                    <p>Passe Toleranzen, Sichtbarkeitsverhalten und Klassen an Deine individuellen Designsysteme an.</p>
+                    <div class="badge">Performance</div>
+                    <h3>Optimized Scrolling</h3>
+                    <p>Uses RequestAnimationFrame for smooth animations and passive event listeners for optimal
+                        performance.</p>
                 </article>
                 <article class="card">
-                    <h3>Fließende Animationen</h3>
-                    <p>Sanfte Übergänge sorgen für ein ruhiges Nutzererlebnis, ohne vom Content abzulenken.</p>
+                    <div class="badge">Configurable</div>
+                    <h3>Flexible Options</h3>
+                    <p>Customize tolerance levels, start offsets, CSS class names, and bottom visibility behavior to
+                        match your design.</p>
                 </article>
                 <article class="card">
-                    <h3>Responsives Layout</h3>
-                    <p>Die Navigation und Karten passen sich automatisch an unterschiedliche Bildschirmgrößen an.</p>
+                    <div class="badge">Lightweight</div>
+                    <h3>Zero Dependencies</h3>
+                    <p>Pure TypeScript implementation with no external dependencies. Small bundle size for fast
+                        loading.</p>
                 </article>
             </div>
         </section>
 
-        <section id="testimonials" class="section">
+        <section id="api" class="section">
             <div class="section-header">
-                <span>Feedback</span>
-                <h2>Begeisterung aus der Community</h2>
+                <span>API Reference</span>
+                <h2>Configuration Options</h2>
             </div>
-            <div class="card testimonial">
-                <p>„Seit wir die Scroll Aware Navigation einsetzen, springt die Absprungrate deutlich seltener nach oben.
-                    Besucher finden sofort, wonach sie suchen.“</p>
-                <cite>– Lea Sommer, UX Design Lead</cite>
+            <div class="grid">
+                <article class="card">
+                    <h3>ScrollAwareNavOptions</h3>
+                    <div
+                        style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <div><strong>startOffset?:</strong> number</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Pixel offset to start fixing
+                            navigation (default: element.offsetHeight)</div>
+                        <br>
+                        <div><strong>tolerance?:</strong> number</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Minimum scroll distance for changes
+                            (default: 8)</div>
+                        <br>
+                        <div><strong>showAtBottom?:</strong> boolean</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Show navigation at page bottom
+                            (default: true)</div>
+                        <br>
+                        <div><strong>classNames?:</strong> object</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Custom CSS class names for
+                            different states</div>
+                    </div>
+                </article>
+                <article class="card">
+                    <h3>Public Methods</h3>
+                    <div
+                        style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <div><strong>init():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Initialize scroll monitoring</div>
+                        <br>
+                        <div><strong>destroy():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Remove scroll monitoring and
+                            cleanup</div>
+                        <br>
+                        <div><strong>reset():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Reset navigation to default state
+                        </div>
+                        <br>
+                        <div><strong>fix():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Fix navigation in visible state
+                        </div>
+                        <br>
+                        <div><strong>hide():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Hide navigation</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="usage" class="section">
+            <div class="section-header">
+                <span>Usage</span>
+                <h2>Quick Implementation Guide</h2>
+            </div>
+            <div class="card">
+                <h3>Basic Setup</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <pre><code style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;"><span style="color: #7dd3fc;">import</span> { ScrollAwareNav } <span style="color: #7dd3fc;">from</span> <span style="color: #fbbf24;">'./scroll-aware-nav'</span>;
+
+<span style="color: #86efac;">// get your navigation element</span>
+<span style="color: #7dd3fc;">const</span> header = document.<span style="color: #fbbf24;">getElementById</span>(<span style="color: #fbbf24;">'header'</span>);
+
+<span style="color: #86efac;">// initialize with default options</span>
+<span style="color: #7dd3fc;">const</span> nav = <span style="color: #7dd3fc;">new</span> <span style="color: #fbbf24;">ScrollAwareNav</span>(header);
+
+<span style="color: #86efac;">// or with custom options</span>
+<span style="color: #7dd3fc;">const</span> nav = <span style="color: #7dd3fc;">new</span> <span style="color: #fbbf24;">ScrollAwareNav</span>(header, {
+  tolerance: <span style="color: #fbbf24;">15</span>,
+  showAtBottom: <span style="color: #7dd3fc;">false</span>,
+  classNames: {
+    base: <span style="color: #fbbf24;">'my-nav'</span>,
+    hidden: <span style="color: #fbbf24;">'my-nav--hidden'</span>
+  }
+});</code></pre>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Required CSS Classes</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <pre><code style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;"><span style="color: #fbbf24;">.scroll-nav</span> {
+  <span style="color: #7dd3fc;">transition</span>: transform <span style="color: #fbbf24;">0.3s</span> ease;
+}
+
+<span style="color: #fbbf24;">.scroll-nav--hidden</span> {
+  <span style="color: #7dd3fc;">transform</span>: <span style="color: #fbbf24;">translateY</span>(-100%);
+}
+
+<span style="color: #fbbf24;">.scroll-nav--fixed</span> {
+  <span style="color: #86efac;">/* Additional styles for fixed state */</span>
+  <span style="color: #7dd3fc;">background</span>: <span style="color: #fbbf24;">rgba</span>(0, 0, 0, 0.9);
+}</code></pre>
+                </div>
             </div>
         </section>
 
         <section id="contact" class="section">
             <div class="section-header">
-                <span>Kontakt</span>
-                <h2>Bereit für die nächste Experience?</h2>
+                <span>Contact</span>
+                <h2>Get in Touch</h2>
             </div>
-            <p>Wir unterstützen Dich gerne bei der Umsetzung Deiner nächsten Scroll Experience. Schreib uns eine kurze
-                Nachricht – wir melden uns innerhalb von 24 Stunden.</p>
+            <p>Questions about implementation? Need custom features? Feel free to reach out for support or collaboration
+                on your next project with ScrollAwareNav.</p>
             <div class="contact-list">
-                <div><strong>E-Mail:</strong> hello@scrollaware.design</div>
-                <div><strong>Telefon:</strong> +49 30 123 45 678</div>
-                <div><strong>Adresse:</strong> Future Street 12, 10115 Berlin</div>
+                <div><strong>GitHub:</strong> <a href="#"
+                        style="color: var(--accent);">github.com/jmartsch/scroll-aware-nav</a></div>
+                <div><strong>Issues:</strong> Report bugs and request features</div>
+                <div><strong>License:</strong> MIT - Free for personal and commercial use</div>
             </div>
         </section>
 
-        <p class="footer-note">© 2024 Scroll Aware Navigation Demo. Gestaltet mit Liebe zum Detail.</p>
     </main>
 
     <script type="module">
         import { ScrollAwareNav } from '/src/index.ts';
 
-        // Initialisierung der Navigation
+        // Initialize the navigation
         const header = document.getElementById('header');
         const nav = new ScrollAwareNav(header, {
             tolerance: 10,
             showAtBottom: true,
-            classNames: {
-                base: 'scroll-nav',
-                fixed: 'scroll-nav--fixed',
-                hidden: 'scroll-nav--hidden'
-            }
+
         });
+
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                    Copied!
+                `;
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
     </script>
 </body>
 
