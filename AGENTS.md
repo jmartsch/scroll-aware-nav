@@ -1,8 +1,8 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-- `src/` contains the TypeScript source for `ScrollAwareNav`: `index.ts` (core behavior), `types.ts` (public interfaces), `test-setup.ts` (test configuration).
-- `src/__tests__/` contains comprehensive test suites: `ScrollAwareNav.test.ts` (unit tests), `scroll-behavior.test.ts` (behavior tests).
+- `src/` contains the TypeScript source for `ScrollReactiveNav`: `index.ts` (core behavior), `types.ts` (public interfaces), `test-setup.ts` (test configuration).
+- `src/__tests__/` contains comprehensive test suites: `ScrollReactiveNav.test.ts` (unit tests), `scroll-behavior.test.ts` (behavior tests).
 - `dist/` holds the compiled ES and UMD bundles plus generated TypeScript declarations; regenerate via build, do not edit.
 - `index.html` provides local development demo, `docs.html` is optimized for GitHub Pages deployment.
 - `vitest.config.ts`, `vite.config.ts`, `tsconfig.json` handle build and test configuration; keep changes documented.
@@ -22,7 +22,7 @@
 
 ## Coding Style & Naming Conventions
 - Rely on Prettier and ESLint outputs; avoid manual spacing tweaks and let the formatter decide indentation.
-- Use PascalCase for classes (`ScrollAwareNav`), camelCase for functions and variables, and SCSS-style BEM modifiers for CSS classes (`scroll-nav--hidden`).
+- Use PascalCase for classes (`ScrollReactiveNav`), camelCase for functions and variables, and SCSS-style BEM modifiers for CSS classes (`scroll-nav--hidden`).
 - Keep comments concise;
 
 ## Testing Guidelines

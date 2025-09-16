@@ -5,9 +5,9 @@
  */
 
 import type {
-    ScrollAwareNavClassNames,
-    ScrollAwareNavInstance,
-    ScrollAwareNavOptions,
+    ScrollReactiveNavClassNames,
+    ScrollReactiveNavInstance,
+    ScrollReactiveNavOptions,
 } from './types';
 
 /**
@@ -19,28 +19,28 @@ const isBrowser = (): boolean => {
     );
 };
 
-export class ScrollAwareNav implements ScrollAwareNavInstance {
+export class ScrollReactiveNav implements ScrollReactiveNavInstance {
     private readonly element: HTMLElement;
     private readonly startOffset: number;
     private readonly tolerance: number;
     private readonly showAtBottom: boolean;
-    private readonly classNames: ScrollAwareNavClassNames;
+    private readonly classNames: ScrollReactiveNavClassNames;
     private readonly scrollOptions: AddEventListenerOptions;
     private scrollLast: number;
     private scrollRAF?: number;
     private isInitialized = false;
 
-    constructor(element: HTMLElement | null, options: ScrollAwareNavOptions = {}) {
+    constructor(element: HTMLElement | null, options: ScrollReactiveNavOptions = {}) {
         if (!isBrowser()) {
-            throw new Error('ScrollAwareNav can only be used in a browser environment');
+            throw new Error('ScrollReactiveNav can only be used in a browser environment');
         }
 
         if (!element) {
-            throw new Error('An HTML element must be provided for ScrollAwareNav');
+            throw new Error('An HTML element must be provided for ScrollReactiveNav');
         }
 
-        if (!ScrollAwareNav.isSupported()) {
-            throw new Error('ScrollAwareNav is not supported in this browser');
+        if (!ScrollReactiveNav.isSupported()) {
+            throw new Error('ScrollReactiveNav is not supported in this browser');
         }
 
         this.element = element;
@@ -181,7 +181,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
 }
 
 // Export types for better DX
-export type { ScrollAwareNavClassNames, ScrollAwareNavInstance, ScrollAwareNavOptions };
+export type { ScrollReactiveNavClassNames, ScrollReactiveNavInstance, ScrollReactiveNavOptions };
 
 // Default export for easier usage
-export default ScrollAwareNav;
+export default ScrollReactiveNav;

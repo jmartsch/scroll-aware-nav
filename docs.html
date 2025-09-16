@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScrollAwareNav - Intelligent Navigation Component</title>
+    <title>ScrollReactiveNav - Intelligent Navigation Component</title>
 
     <link rel="stylesheet" href="./src/styles.css">
     <script type="module">
@@ -345,7 +345,7 @@
         <div class="header-inner">
             <div class="brand">
                 <div class="brand-logo">SN</div>
-                <h1>ScrollAwareNav</h1>
+                <h1>ScrollReactiveNav</h1>
             </div>
             <nav>
                 <a href="#intro">Introduction</a>
@@ -363,7 +363,7 @@
                 <span>Welcome</span>
                 <h2>Intelligent Navigation that Responds to User Behavior</h2>
             </div>
-            <p>ScrollAwareNav is a lightweight TypeScript utility that creates smart, responsive navigation behavior.
+            <p>ScrollReactiveNav is a lightweight TypeScript utility that creates smart, responsive navigation behavior.
                It automatically hides the navigation when users scroll down and shows it when they scroll up, providing
                an enhanced user experience for modern web applications.</p>
             <a class="cta" href="#usage">Get Started</a>
@@ -409,7 +409,7 @@
             </div>
             <div class="grid">
                 <article class="card">
-                    <h3>ScrollAwareNavOptions</h3>
+                    <h3>ScrollReactiveNavOptions</h3>
                     <div style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
                         <div><strong>startOffset?:</strong> number</div>
                         <div style="color: var(--text-secondary); font-size: 0.9em;">Pixel offset to start fixing
@@ -481,16 +481,16 @@
                         </svg>
                         Copy
                     </button>
-                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from 'scroll-reactive-nav';
+                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollReactiveNav } from 'scroll-reactive-nav';
 
 // get your navigation element
 const header = document.getElementById('header');
 
 // initialize with default options
-const nav = new ScrollAwareNav(header);
+const nav = new ScrollReactiveNav(header);
 
 // or with custom options
-const nav = new ScrollAwareNav(header, {
+const nav = new ScrollReactiveNav(header, {
   tolerance: 15,
   showAtBottom: false,
   classNames: {
@@ -532,7 +532,7 @@ const nav = new ScrollAwareNav(header, {
                 <h2>Get in Touch</h2>
             </div>
             <p>Questions about implementation? Need custom features? Feel free to reach out for support or collaboration
-               on your next project with ScrollAwareNav.</p>
+               on your next project with ScrollReactiveNav.</p>
             <div class="contact-list">
                 <div><strong>GitHub:</strong> <a href="https://github.com/jmartsch/scroll-reactive-nav" style="color: var(--accent);">github.com/jmartsch/scroll-reactive-nav</a></div>
                 <div><strong>NPM:</strong> <a href="https://www.npmjs.com/package/scroll-reactive-nav" style="color: var(--accent);">npmjs.com/package/scroll-reactive-nav</a></div>
@@ -544,11 +544,11 @@ const nav = new ScrollAwareNav(header, {
 
     <script type="module">
         // Import from built files for GitHub Pages
-        import { ScrollAwareNav } from './dist/scroll-reactive-nav.es.js';
+        import { ScrollReactiveNav } from './dist/scroll-reactive-nav.es.js';
 
         // Initialize the navigation
         const header = document.getElementById('header');
-        const nav = new ScrollAwareNav(header, {
+        const nav = new ScrollReactiveNav(header, {
             tolerance: 10,
             showAtBottom: true,
         });

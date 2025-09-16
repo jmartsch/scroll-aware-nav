@@ -1,4 +1,4 @@
-export interface ScrollAwareNavOptions {
+export interface ScrollReactiveNavOptions {
     /**
      * The pixel offset from which the navigation should be fixed
      * @default element.offsetHeight
@@ -41,13 +41,13 @@ export interface ScrollAwareNavOptions {
     };
 }
 
-export interface ScrollAwareNavClassNames {
+export interface ScrollReactiveNavClassNames {
     base: string;
     fixed: string;
     hidden: string;
 }
 
-export interface ScrollAwareNavInstance {
+export interface ScrollReactiveNavInstance {
     /**
      * Initialize scroll monitoring
      */

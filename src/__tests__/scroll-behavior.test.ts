@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ScrollAwareNav } from '../index';
+import { ScrollReactiveNav } from '../index';
 
-describe('ScrollAwareNav - Scroll Behavior', () => {
+describe('ScrollReactiveNav - Scroll Behavior', () => {
     let mockElement: HTMLElement;
-    let nav: ScrollAwareNav;
+    let nav: ScrollReactiveNav;
 
     beforeEach(() => {
         mockElement = document.createElement('header');
@@ -39,7 +39,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
 
     describe('Scroll Detection', () => {
         it('should not react to scroll at top of page', async () => {
-            nav = new ScrollAwareNav(mockElement, { tolerance: 8 });
+            nav = new ScrollReactiveNav(mockElement, { tolerance: 8 });
 
             // Scroll to top
             Object.defineProperty(window, 'pageYOffset', { value: 0, writable: true });
@@ -55,7 +55,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
         });
 
         it('should show navigation when scrolling up', async () => {
-            nav = new ScrollAwareNav(mockElement, { tolerance: 8, startOffset: 50 });
+            nav = new ScrollReactiveNav(mockElement, { tolerance: 8, startOffset: 50 });
 
             // Simulate scrolling down past startOffset
             Object.defineProperty(window, 'pageYOffset', { value: 200, writable: true });
@@ -72,7 +72,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
         });
 
         it('should hide navigation when scrolling down', async () => {
-            nav = new ScrollAwareNav(mockElement, { tolerance: 8, startOffset: 50 });
+            nav = new ScrollReactiveNav(mockElement, { tolerance: 8, startOffset: 50 });
 
             // Start from a scrolled position
             Object.defineProperty(window, 'pageYOffset', { value: 100, writable: true });
@@ -89,7 +89,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
 
         it('should respect tolerance setting', async () => {
             const tolerance = 15;
-            nav = new ScrollAwareNav(mockElement, { tolerance, startOffset: 20 });
+            nav = new ScrollReactiveNav(mockElement, { tolerance, startOffset: 20 });
 
             // Start from scrolled position above startOffset
             Object.defineProperty(window, 'pageYOffset', { value: 50, writable: true });
@@ -124,7 +124,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
 
     describe('Bottom of Page Behavior', () => {
         it('should show navigation at bottom of page when showAtBottom is true', async () => {
-            nav = new ScrollAwareNav(mockElement, { showAtBottom: true });
+            nav = new ScrollReactiveNav(mockElement, { showAtBottom: true });
 
             // Mock being at bottom of page
             const viewportHeight = 1024;
@@ -147,7 +147,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
         });
 
         it('should not show navigation at bottom when showAtBottom is false', async () => {
-            nav = new ScrollAwareNav(mockElement, { showAtBottom: false, startOffset: 50 });
+            nav = new ScrollReactiveNav(mockElement, { showAtBottom: false, startOffset: 50 });
 
             // Scroll down first to hide it
             Object.defineProperty(window, 'pageYOffset', { value: 200, writable: true });
@@ -175,7 +175,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
         it('should use RAF for scroll handling', async () => {
             const rafSpy = vi.spyOn(window, 'requestAnimationFrame');
 
-            nav = new ScrollAwareNav(mockElement);
+            nav = new ScrollReactiveNav(mockElement);
 
             Object.defineProperty(window, 'pageYOffset', { value: 100, writable: true });
             window.dispatchEvent(new Event('scroll'));
@@ -188,7 +188,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
         it('should not queue multiple RAF calls', async () => {
             const rafSpy = vi.spyOn(window, 'requestAnimationFrame');
 
-            nav = new ScrollAwareNav(mockElement);
+            nav = new ScrollReactiveNav(mockElement);
 
             // Fire multiple scroll events quickly
             window.dispatchEvent(new Event('scroll'));
@@ -204,7 +204,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
         it('should cancel RAF on destroy', () => {
             const cancelRAFSpy = vi.spyOn(window, 'cancelAnimationFrame');
 
-            nav = new ScrollAwareNav(mockElement);
+            nav = new ScrollReactiveNav(mockElement);
 
             // Trigger scroll to create RAF
             window.dispatchEvent(new Event('scroll'));
@@ -225,7 +225,7 @@ describe('ScrollAwareNav - Scroll Behavior', () => {
                 hidden: 'my-nav--hide',
             };
 
-            nav = new ScrollAwareNav(mockElement, { classNames: customClasses });
+            nav = new ScrollReactiveNav(mockElement, { classNames: customClasses });
 
             expect(mockElement.classList.contains('my-nav')).toBe(true);
 

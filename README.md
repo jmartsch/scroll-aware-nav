@@ -4,7 +4,7 @@
 
 A lightweight, intelligent navigation component that creates seamless user experiences through context-aware visibility. Inspired by mobile Safari's chrome behavior and adopted by sites like Medium and Teehan+Lax.
 
-## Why Different from Headroom.js?
+## How is it different from Headroom.js?
 
 While similar in concept to headroom.js, this library focuses on key improvements:
 
@@ -27,7 +27,7 @@ While similar in concept to headroom.js, this library focuses on key improvement
 
 ## Bundle Size
 
-ScrollAwareNav is incredibly lightweight:
+ScrollReactiveNav is incredibly lightweight:
 
 - **ES Module**: 3.92 KB (1.22 KB gzipped)
 - **UMD Bundle**: 2.67 KB (1.05 KB gzipped)
@@ -52,10 +52,10 @@ bun add scroll-reactive-nav
 
 ```html
 <script type="module">
-  import { ScrollAwareNav } from '/src/index.ts';
+  import { ScrollReactiveNav } from '/src/index.ts';
 
   const header = document.getElementById('header');
-  const nav = new ScrollAwareNav(header);
+  const nav = new ScrollReactiveNav(header);
 </script>
 ```
 
@@ -68,23 +68,23 @@ bun add scroll-reactive-nav
 </header>
 
 <script type="module">
-  import { ScrollAwareNav } from 'scroll-reactive-nav';
+  import { ScrollReactiveNav } from 'scroll-reactive-nav';
 
   const header = document.getElementById('header');
-  const nav = new ScrollAwareNav(header);
+  const nav = new ScrollReactiveNav(header);
 </script>
 ```
 
 ## Advanced Configuration
 
 ```typescript
-import { ScrollAwareNav } from 'scroll-reactive-nav';
+import { ScrollReactiveNav } from 'scroll-reactive-nav';
 
 // Select your header element
 const header = document.querySelector('.header');
 
 // Initialize with options
-const nav = new ScrollAwareNav(header, {
+const nav = new ScrollReactiveNav(header, {
   startOffset: 200,      // Scroll position when logic activates
   tolerance: 8,          // Minimum scroll distance for state changes
   showAtBottom: true,    // Show navigation at page bottom
@@ -131,12 +131,12 @@ Add the essential CSS styles:
 
 ## Configuration Options
 
-The `ScrollAwareNav` class accepts these options as the second parameter:
+The `ScrollReactiveNav` class accepts these options as the second parameter:
 
 ### Complete Options
 
 ```typescript
-const nav = new ScrollAwareNav(header, {
+const nav = new ScrollReactiveNav(header, {
   startOffset: 100,        // Height where logic activates
   tolerance: 8,            // Scroll tolerance in pixels
   showAtBottom: true,      // Show navigation at page bottom
@@ -198,12 +198,12 @@ nav.hide();
 
 ## Static Methods
 
-### `ScrollAwareNav.isSupported()`
+### `ScrollReactiveNav.isSupported()`
 Checks if browser supports required features.
 
 ```typescript
-if (ScrollAwareNav.isSupported()) {
-  const nav = new ScrollAwareNav(header);
+if (ScrollReactiveNav.isSupported()) {
+  const nav = new ScrollReactiveNav(header);
 }
 ```
 
@@ -212,7 +212,7 @@ if (ScrollAwareNav.isSupported()) {
 ### Custom Tolerance
 
 ```typescript
-const nav = new ScrollAwareNav(header, {
+const nav = new ScrollReactiveNav(header, {
   tolerance: 15  // Navigation reacts after 15px scroll difference
 });
 ```
@@ -220,7 +220,7 @@ const nav = new ScrollAwareNav(header, {
 ### No Bottom Show
 
 ```typescript
-const nav = new ScrollAwareNav(header, {
+const nav = new ScrollReactiveNav(header, {
   showAtBottom: false  // Navigation stays hidden at bottom
 });
 ```
@@ -228,7 +228,7 @@ const nav = new ScrollAwareNav(header, {
 ### Custom CSS Classes
 
 ```typescript
-const nav = new ScrollAwareNav(header, {
+const nav = new ScrollReactiveNav(header, {
   classNames: {
     base: 'my-nav',
     fixed: 'my-nav--stick',
@@ -250,10 +250,10 @@ Fully written in TypeScript with complete type definitions:
 
 ```typescript
 import {
-  ScrollAwareNav,
-  ScrollAwareNavOptions,
-  ScrollAwareNavClassNames,
-  ScrollAwareNavInstance
+  ScrollReactiveNav,
+  ScrollReactiveNavOptions,
+  ScrollReactiveNavClassNames,
+  ScrollReactiveNavInstance
 } from 'scroll-reactive-nav';
 ```
 
