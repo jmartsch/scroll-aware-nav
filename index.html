@@ -7,6 +7,35 @@
     <title>ScrollAwareNav - Intelligent Navigation Component</title>
 
     <link rel="stylesheet" href="/src/styles.css">
+    <script type="module">
+        import { codeToHtml } from 'https://esm.sh/shiki@1.0.0';
+
+        // Initialize Shiki highlighting
+        window.highlightCode = async function() {
+            const codeBlocks = document.querySelectorAll('code[data-lang]');
+
+            for (const block of codeBlocks) {
+                const code = block.textContent;
+                const lang = block.getAttribute('data-lang');
+
+                try {
+                    const html = await codeToHtml(code, {
+                        lang: lang,
+                        theme: 'github-dark'
+                    });
+
+                    // Extract just the code content without the outer pre tag
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+                    const codeContent = tempDiv.querySelector('code').innerHTML;
+
+                    block.innerHTML = codeContent;
+                } catch (error) {
+                    console.error('Failed to highlight code:', error);
+                }
+            }
+        };
+    </script>
     <style>
         * {
             margin: 0;
@@ -441,21 +470,21 @@
                         </svg>
                         Copy
                     </button>
-                    <pre><code style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;"><span style="color: #7dd3fc;">import</span> { ScrollAwareNav } <span style="color: #7dd3fc;">from</span> <span style="color: #fbbf24;">'./scroll-aware-nav'</span>;
+                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from './scroll-aware-nav';
 
-<span style="color: #86efac;">// get your navigation element</span>
-<span style="color: #7dd3fc;">const</span> header = document.<span style="color: #fbbf24;">getElementById</span>(<span style="color: #fbbf24;">'header'</span>);
+// get your navigation element
+const header = document.getElementById('header');
 
-<span style="color: #86efac;">// initialize with default options</span>
-<span style="color: #7dd3fc;">const</span> nav = <span style="color: #7dd3fc;">new</span> <span style="color: #fbbf24;">ScrollAwareNav</span>(header);
+// initialize with default options
+const nav = new ScrollAwareNav(header);
 
-<span style="color: #86efac;">// or with custom options</span>
-<span style="color: #7dd3fc;">const</span> nav = <span style="color: #7dd3fc;">new</span> <span style="color: #fbbf24;">ScrollAwareNav</span>(header, {
-  tolerance: <span style="color: #fbbf24;">15</span>,
-  showAtBottom: <span style="color: #7dd3fc;">false</span>,
+// or with custom options
+const nav = new ScrollAwareNav(header, {
+  tolerance: 15,
+  showAtBottom: false,
   classNames: {
-    base: <span style="color: #fbbf24;">'my-nav'</span>,
-    hidden: <span style="color: #fbbf24;">'my-nav--hidden'</span>
+    base: 'my-nav',
+    hidden: 'my-nav--hidden'
   }
 });</code></pre>
                 </div>
@@ -470,17 +499,17 @@
                         </svg>
                         Copy
                     </button>
-                    <pre><code style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;"><span style="color: #fbbf24;">.scroll-nav</span> {
-  <span style="color: #7dd3fc;">transition</span>: transform <span style="color: #fbbf24;">0.3s</span> ease;
+                    <pre><code data-lang="css" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">.scroll-nav {
+  transition: transform 0.3s ease;
 }
 
-<span style="color: #fbbf24;">.scroll-nav--hidden</span> {
-  <span style="color: #7dd3fc;">transform</span>: <span style="color: #fbbf24;">translateY</span>(-100%);
+.scroll-nav--hidden {
+  transform: translateY(-100%);
 }
 
-<span style="color: #fbbf24;">.scroll-nav--fixed</span> {
-  <span style="color: #86efac;">/* Additional styles for fixed state */</span>
-  <span style="color: #7dd3fc;">background</span>: <span style="color: #fbbf24;">rgba</span>(0, 0, 0, 0.9);
+.scroll-nav--fixed {
+  /* Additional styles for fixed state */
+  background: rgba(0, 0, 0, 0.9);
 }</code></pre>
                 </div>
             </div>
@@ -514,8 +543,13 @@
 
         });
 
-        // Copy code functionality
-        function copyCode(button) {
+        // Initialize Shiki highlighting
+        if (window.highlightCode) {
+            window.highlightCode();
+        }
+
+        // Copy code functionality - make it globally available
+        window.copyCode = function(button) {
             const codeBlock = button.nextElementSibling.querySelector('code');
             const text = codeBlock.textContent;
 
