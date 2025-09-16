@@ -1,0 +1,40 @@
+/**
+ * Scroll Aware Nav - Default Styles
+ * Diese Stile können als Basis für eigene Anpassungen verwendet werden
+ */
+
+/* Basis-Klasse */
+.scroll-nav {
+    transition: transform 0.3s ease;
+    will-change: transform;
+    z-index: 1000;
+}
+
+/* Fixierter Zustand */
+.scroll-nav--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+/* Ausgeblendeter Zustand */
+.scroll-nav--hidden {
+    transform: translateY(-100%);
+}
+
+/* Optional: Schatten im fixierten Zustand */
+.scroll-nav--fixed {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Smooth Scroll für bessere UX */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Optional: Verhindert Content-Sprung beim Fixieren */
+.scroll-nav--fixed + * {
+    margin-top: var(--scroll-nav-height, 0px);
+}

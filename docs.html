@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollAwareNav - Intelligent Navigation Component</title>
+
+    <link rel="stylesheet" href="./src/styles.css">
+    <script type="module">
+        import { codeToHtml } from 'https://esm.sh/shiki@1.0.0';
+
+        // Initialize Shiki highlighting
+        window.highlightCode = async function() {
+            const codeBlocks = document.querySelectorAll('code[data-lang]');
+
+            for (const block of codeBlocks) {
+                const code = block.textContent;
+                const lang = block.getAttribute('data-lang');
+
+                try {
+                    const html = await codeToHtml(code, {
+                        lang: lang,
+                        theme: 'github-dark'
+                    });
+
+                    // Extract just the code content without the outer pre tag
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+                    const codeContent = tempDiv.querySelector('code').innerHTML;
+
+                    block.innerHTML = codeContent;
+                } catch (error) {
+                    console.error('Failed to highlight code:', error);
+                }
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --scroll-nav-height: 76px;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #06b6d4 100%);
+            --card-bg: rgba(15, 23, 42, 0.65);
+            --card-border: rgba(148, 163, 184, 0.2);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5f5;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --shadow-elevated: 0 20px 45px rgba(15, 23, 42, 0.35);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            width: 100%;
+            backdrop-filter: blur(18px);
+            background: rgba(15, 23, 42, 0.75);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .scroll-nav--fixed {
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .scroll-nav--hidden {
+            transform: translateY(-100%);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(140deg, #38bdf8, #6366f1);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: rgba(15, 23, 42, 0.9);
+        }
+
+        .brand h1 {
+            font-size: 1.35rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.35rem;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 999px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            color: var(--text-primary);
+        }
+
+        nav a:hover::after,
+        nav a:focus::after {
+            transform: scaleX(1);
+        }
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5.5rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .section {
+            display: grid;
+            gap: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 3rem;
+            box-shadow: var(--shadow-elevated);
+            scroll-margin-top: calc(var(--scroll-nav-height) + 40px);
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .section span {
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .section h2 {
+            font-size: 2.1rem;
+            font-weight: 700;
+        }
+
+        .section p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid.two {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 22px;
+            padding: 1.75rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 12px 35px rgba(8, 47, 73, 0.2);
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            padding: 0.35rem 0.75rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border-radius: 999px;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: fit-content;
+            padding: 0.85rem 1.75rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            color: rgba(15, 23, 42, 0.92);
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 18px 24px rgba(56, 189, 248, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta:hover,
+        .cta:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 28px rgba(56, 189, 248, 0.35);
+        }
+
+        .testimonial {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .testimonial cite {
+            display: block;
+            margin-top: 1rem;
+            font-style: normal;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-note {
+            text-align: center;
+            color: rgba(241, 245, 249, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .code-block {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.9);
+            color: rgba(15, 23, 42, 0.9);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+            z-index: 2;
+        }
+
+        .copy-btn:hover {
+            background: rgba(56, 189, 248, 1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .copy-btn.copied {
+            background: rgba(34, 197, 94, 0.9);
+        }
+
+        .copy-btn.copied:hover {
+            background: rgba(34, 197, 94, 1);
+        }
+
+        @media (max-width: 720px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1rem 1.5rem;
+            }
+
+            nav {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 2.25rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header scroll-nav" id="header">
+        <div class="header-inner">
+            <div class="brand">
+                <div class="brand-logo">SN</div>
+                <h1>ScrollAwareNav</h1>
+            </div>
+            <nav>
+                <a href="#intro">Introduction</a>
+                <a href="#features">Features</a>
+                <a href="#api">API</a>
+                <a href="#usage">Usage</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content">
+        <section id="intro" class="section">
+            <div class="section-header">
+                <span>Welcome</span>
+                <h2>Intelligent Navigation that Responds to User Behavior</h2>
+            </div>
+            <p>ScrollAwareNav is a lightweight TypeScript utility that creates smart, responsive navigation behavior.
+               It automatically hides the navigation when users scroll down and shows it when they scroll up, providing
+               an enhanced user experience for modern web applications.</p>
+            <a class="cta" href="#usage">Get Started</a>
+        </section>
+
+        <section id="features" class="section">
+            <div class="section-header">
+                <span>Features</span>
+                <h2>Built for Performance and Flexibility</h2>
+            </div>
+            <div class="grid two">
+                <article class="card">
+                    <div class="badge">TypeScript</div>
+                    <h3>Type-Safe Development</h3>
+                    <p>Written in TypeScript with full type definitions, ensuring better development experience and
+                        fewer runtime errors.</p>
+                </article>
+                <article class="card">
+                    <div class="badge">Performance</div>
+                    <h3>Optimized Scrolling</h3>
+                    <p>Uses RequestAnimationFrame for smooth animations and passive event listeners for optimal
+                        performance.</p>
+                </article>
+                <article class="card">
+                    <div class="badge">Configurable</div>
+                    <h3>Flexible Options</h3>
+                    <p>Customize tolerance levels, start offsets, CSS class names, and bottom visibility behavior to
+                        match your design.</p>
+                </article>
+                <article class="card">
+                    <div class="badge">Lightweight</div>
+                    <h3>Zero Dependencies</h3>
+                    <p>Pure TypeScript implementation with no external dependencies. Small bundle size for fast
+                        loading.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="api" class="section">
+            <div class="section-header">
+                <span>API Reference</span>
+                <h2>Configuration Options</h2>
+            </div>
+            <div class="grid">
+                <article class="card">
+                    <h3>ScrollAwareNavOptions</h3>
+                    <div style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <div><strong>startOffset?:</strong> number</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Pixel offset to start fixing
+                            navigation (default: element.offsetHeight)</div>
+                        <br>
+                        <div><strong>tolerance?:</strong> number</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Minimum scroll distance for changes
+                            (default: 8)</div>
+                        <br>
+                        <div><strong>showAtBottom?:</strong> boolean</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Show navigation at page bottom
+                            (default: true)</div>
+                        <br>
+                        <div><strong>classNames?:</strong> object</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Custom CSS class names for
+                            different states</div>
+                    </div>
+                </article>
+                <article class="card">
+                    <h3>Public Methods</h3>
+                    <div style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <div><strong>init():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Initialize scroll monitoring</div>
+                        <br>
+                        <div><strong>destroy():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Remove scroll monitoring and
+                            cleanup</div>
+                        <br>
+                        <div><strong>reset():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Reset navigation to default state
+                        </div>
+                        <br>
+                        <div><strong>fix():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Fix navigation in visible state
+                        </div>
+                        <br>
+                        <div><strong>hide():</strong> void</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9em;">Hide navigation</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="usage" class="section">
+            <div class="section-header">
+                <span>Usage</span>
+                <h2>Quick Implementation Guide</h2>
+            </div>
+            <div class="card">
+                <h3>NPM Installation</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <pre><code data-lang="bash" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">npm install scroll-aware-nav@beta</code></pre>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Basic Setup</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from 'scroll-aware-nav';
+
+// get your navigation element
+const header = document.getElementById('header');
+
+// initialize with default options
+const nav = new ScrollAwareNav(header);
+
+// or with custom options
+const nav = new ScrollAwareNav(header, {
+  tolerance: 15,
+  showAtBottom: false,
+  classNames: {
+    base: 'my-nav',
+    hidden: 'my-nav--hidden'
+  }
+});</code></pre>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Required CSS Classes</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <pre><code data-lang="css" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">.scroll-nav {
+  transition: transform 0.3s ease;
+}
+
+.scroll-nav--hidden {
+  transform: translateY(-100%);
+}
+
+.scroll-nav--fixed {
+  /* Additional styles for fixed state */
+  background: rgba(0, 0, 0, 0.9);
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-header">
+                <span>Contact</span>
+                <h2>Get in Touch</h2>
+            </div>
+            <p>Questions about implementation? Need custom features? Feel free to reach out for support or collaboration
+               on your next project with ScrollAwareNav.</p>
+            <div class="contact-list">
+                <div><strong>GitHub:</strong> <a href="https://github.com/jmartsch/scroll-aware-nav" style="color: var(--accent);">github.com/jmartsch/scroll-aware-nav</a></div>
+                <div><strong>NPM:</strong> <a href="https://www.npmjs.com/package/scroll-aware-nav" style="color: var(--accent);">npmjs.com/package/scroll-aware-nav</a></div>
+                <div><strong>License:</strong> MPL-2.0 - Free for personal and commercial use</div>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module">
+        // Import from built files for GitHub Pages
+        import { ScrollAwareNav } from './dist/scroll-aware-nav.es.js';
+
+        // Initialize the navigation
+        const header = document.getElementById('header');
+        const nav = new ScrollAwareNav(header, {
+            tolerance: 10,
+            showAtBottom: true,
+        });
+
+        // Initialize Shiki highlighting
+        if (window.highlightCode) {
+            window.highlightCode();
+        }
+
+        // Copy code functionality - make it globally available
+        window.copyCode = function(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                    Copied!
+                `;
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>

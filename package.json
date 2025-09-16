@@ -1,0 +1,93 @@
+{
+    "name": "scroll-aware-nav",
+    "version": "1.0.0-beta.7",
+    "description": "A lightweight TypeScript library for intelligent scroll-aware navigation behavior",
+    "type": "module",
+    "main": "./dist/scroll-aware-nav.umd.js",
+    "module": "./dist/scroll-aware-nav.es.js",
+    "types": "./dist/index.d.ts",
+    "style": "./dist/scroll-aware-nav.css",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/scroll-aware-nav.es.js",
+            "require": "./dist/scroll-aware-nav.umd.js"
+        },
+        "./style.css": "./dist/scroll-aware-nav.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "biome lint src",
+        "lint:fix": "biome lint --fix src",
+        "format": "biome format --write src",
+        "check": "biome check src",
+        "check:fix": "biome check --fix src",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:ui": "vitest --ui",
+        "test:coverage": "vitest run --coverage",
+        "prepublishOnly": "bun run build",
+        "prepare": "bun run build",
+        "release:patch": "npm version patch && npm publish --tag beta && git push --follow-tags",
+        "release:minor": "npm version minor && npm publish --tag beta && git push --follow-tags",
+        "release:major": "npm version major && npm publish --tag beta && git push --follow-tags",
+        "release:prerelease": "npm version prerelease --preid=beta && npm publish --tag beta && git push --follow-tags",
+        "release:final": "npm version 1.0.0 && npm publish && git push --follow-tags"
+    },
+    "keywords": [
+        "scroll",
+        "navigation",
+        "header",
+        "navbar",
+        "typescript",
+        "frontend",
+        "ui",
+        "scroll-behavior",
+        "hide-show",
+        "smart-header",
+        "headroom",
+        "scroll-aware",
+        "mobile-first",
+        "performance"
+    ],
+    "author": {
+        "name": "Jens Martsch",
+        "email": "jmartsch@gmail.com",
+        "url": "https://github.com/jmartsch"
+    },
+    "license": "MPL-2.0",
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.4",
+        "@types/eslint": "^8.56.12",
+        "@types/node": "^20.19.15",
+        "@vitest/coverage-v8": "^3.2.4",
+        "@vitest/ui": "^3.2.4",
+        "happy-dom": "^18.0.1",
+        "jsdom": "^27.0.0",
+        "terser": "^5.44.0",
+        "typescript": "^5.9.2",
+        "vite": "^7.1.5",
+        "vite-plugin-dts": "^3.9.1",
+        "vitest": "^3.2.4"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jmartsch/scroll-aware-nav.git"
+    },
+    "bugs": {
+        "url": "https://github.com/jmartsch/scroll-aware-nav/issues"
+    },
+    "homepage": "https://github.com/jmartsch/scroll-aware-nav#readme",
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}
