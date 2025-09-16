@@ -1,17 +1,21 @@
 # Scroll Reactive Navigation
 
-**Next-generation smart header behavior for modern web experiences.**
+**Hide and show your navigation based on scroll direction.**
 
-A lightweight, intelligent navigation component that creates seamless user experiences through context-aware visibility. Inspired by mobile Safari's chrome behavior and adopted by sites like Medium and Teehan+Lax.
+The Navigation disappears as you scroll down, reappears when scrolling up. An elegant pattern that anticipates user intent and responds accordingly.
+
+Inspired by mobile Safari's chrome behavior and adopted by sites like Medium and Teehan+Lax.
 
 ## How is it different from Headroom.js?
 
 While similar in concept to headroom.js, this library focuses on key improvements:
 
 ✨ **Natural scroll behavior** - Header initially scrolls out naturally like static content
+
 🎯 **Smart reappearance** - Fixed positioning only when scrolling up, respecting scroll tolerance
-📱 **Mobile-first UX** - Interaction patterns that mirror mobile Safari's chrome behavior
+
 🎨 **Minimal & opinionated** - Smaller footprint with sensible defaults
+
 ⚡ **Enhanced performance** - Optimized RAF usage and passive event listeners
 
 ## Features
@@ -80,11 +84,7 @@ bun add scroll-reactive-nav
 ```typescript
 import { ScrollReactiveNav } from 'scroll-reactive-nav';
 
-// Select your header element
-const header = document.querySelector('.header');
-
-// Initialize with options
-const nav = new ScrollReactiveNav(header, {
+const nav = new ScrollReactiveNav(document.querySelector('.header'), {
   startOffset: 200,      // Scroll position when logic activates
   tolerance: 8,          // Minimum scroll distance for state changes
   showAtBottom: true,    // Show navigation at page bottom
