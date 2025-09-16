@@ -25,7 +25,12 @@
         "lint": "eslint src --ext .ts",
         "format": "prettier --write \"src/**/*.{ts,css}\"",
         "prepublishOnly": "bun run build",
-        "prepare": "bun run build"
+        "prepare": "bun run build",
+        "release:patch": "npm version patch && npm publish --tag beta && git push --follow-tags",
+        "release:minor": "npm version minor && npm publish --tag beta && git push --follow-tags",
+        "release:major": "npm version major && npm publish --tag beta && git push --follow-tags",
+        "release:prerelease": "npm version prerelease --preid=beta && npm publish --tag beta && git push --follow-tags",
+        "release:final": "npm version 1.0.0 && npm publish && git push --follow-tags"
     },
     "keywords": [
         "scroll",
@@ -50,16 +55,16 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "@types/node": "^20.0.0",
-        "@typescript-eslint/eslint-plugin": "^6.0.0",
-        "@typescript-eslint/parser": "^6.0.0",
-        "eslint": "^8.0.0",
-        "prettier": "^3.0.0",
-        "typescript": "^5.0.0",
-        "vite": "^5.0.0",
-        "vite-plugin-dts": "^3.0.0",
-        "@types/eslint": "^8.0.0",
-        "terser": "^5.0.0"
+        "@types/node": "^20.19.15",
+        "@typescript-eslint/eslint-plugin": "^6.21.0",
+        "@typescript-eslint/parser": "^6.21.0",
+        "eslint": "^8.57.1",
+        "prettier": "^3.6.2",
+        "typescript": "^5.9.2",
+        "vite": "^5.4.20",
+        "vite-plugin-dts": "^3.9.1",
+        "@types/eslint": "^8.56.12",
+        "terser": "^5.44.0"
     },
     "repository": {
         "type": "git",
