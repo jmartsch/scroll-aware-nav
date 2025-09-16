@@ -57,7 +57,7 @@ describe('ScrollAwareNav', () => {
 
     it('should throw error if no element provided', () => {
       expect(() => new ScrollAwareNav(null)).toThrow(
-        'Ein HTML-Element muss für ScrollAwareNav bereitgestellt werden'
+        'An HTML element must be provided for ScrollAwareNav'
       );
     });
 
@@ -72,7 +72,7 @@ describe('ScrollAwareNav', () => {
       delete global.document;
 
       expect(() => new ScrollAwareNav(mockElement)).toThrow(
-        'ScrollAwareNav kann nur in einer Browser-Umgebung verwendet werden'
+        'ScrollAwareNav can only be used in a browser environment'
       );
 
       // Restore

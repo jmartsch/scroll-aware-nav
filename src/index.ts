@@ -1,7 +1,7 @@
 import type { ScrollAwareNavOptions, ScrollAwareNavClassNames, ScrollAwareNavInstance } from './types';
 
 /**
- * Überprüft, ob der Code in einer Browser-Umgebung ausgeführt wird
+ * Check if code is running in a browser environment
  */
 const isBrowser = (): boolean => {
     return typeof window === 'object' &&
@@ -22,15 +22,15 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
 
     constructor(element: HTMLElement | null, options: ScrollAwareNavOptions = {}) {
         if (!isBrowser()) {
-            throw new Error('ScrollAwareNav kann nur in einer Browser-Umgebung verwendet werden');
+            throw new Error('ScrollAwareNav can only be used in a browser environment');
         }
 
         if (!element) {
-            throw new Error('Ein HTML-Element muss für ScrollAwareNav bereitgestellt werden');
+            throw new Error('An HTML element must be provided for ScrollAwareNav');
         }
 
         if (!ScrollAwareNav.isSupported()) {
-            throw new Error('ScrollAwareNav wird in diesem Browser nicht unterstützt');
+            throw new Error('ScrollAwareNav is not supported in this browser');
         }
 
         this.element = element;
@@ -48,7 +48,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 
     /**
-     * Überprüft, ob die erforderlichen Browser-Features unterstützt werden
+     * Check if required browser features are supported
      */
     static isSupported(): boolean {
         if (!isBrowser()) return false;
@@ -64,7 +64,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 
     /**
-     * Initialisiert die Scroll-Überwachung
+     * Initialize scroll monitoring
      */
     public init(): void {
         if (this.isInitialized) {
@@ -77,7 +77,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 
     /**
-     * Entfernt die Scroll-Überwachung und alle zugehörigen Klassen
+     * Remove scroll monitoring and all associated classes
      */
     public destroy(): void {
         if (!this.isInitialized) {
@@ -94,14 +94,14 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 
     /**
-     * Setzt alle Zustände zurück
+     * Reset all states
      */
     public reset(): void {
         this.removeClass(this.classNames.fixed, this.classNames.hidden);
     }
 
     /**
-     * Fixiert die Navigation
+     * Fix the navigation
      */
     public fix(): void {
         this.addClass(this.classNames.fixed);
@@ -109,28 +109,28 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 
     /**
-     * Blendet die Navigation aus
+     * Hide the navigation
      */
     public hide(): void {
         this.addClass(this.classNames.hidden);
     }
 
     /**
-     * Fügt CSS-Klassen zum Element hinzu
+     * Add CSS classes to the element
      */
     private addClass(...classNames: string[]): void {
         this.element.classList.add(...classNames);
     }
 
     /**
-     * Entfernt CSS-Klassen vom Element
+     * Remove CSS classes from the element
      */
     private removeClass(...classNames: string[]): void {
         this.element.classList.remove(...classNames);
     }
 
     /**
-     * Behandelt das Scroll-Event mit RequestAnimationFrame für bessere Performance
+     * Handle scroll events with RequestAnimationFrame for better performance
      */
     private handleScroll = (): void => {
         if (this.scrollRAF) {
@@ -162,7 +162,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     };
 
     /**
-     * Gibt die aktuelle Dokumenthöhe zurück
+     * Get the current document height
      */
     private getScrollHeight(): number {
         const body = document.body;
@@ -176,8 +176,8 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
     }
 }
 
-// Export Typen für bessere DX
+// Export types for better DX
 export type { ScrollAwareNavOptions, ScrollAwareNavClassNames, ScrollAwareNavInstance };
 
-// Default export für einfachere Verwendung
+// Default export for easier usage
 export default ScrollAwareNav;

@@ -1,40 +1,40 @@
 export interface ScrollAwareNavOptions {
     /**
-     * Der Offset in Pixeln, ab dem die Navigation fixiert werden soll
+     * The pixel offset from which the navigation should be fixed
      * @default element.offsetHeight
      */
     startOffset?: number;
 
     /**
-     * Die minimale Scroll-Distanz in Pixeln, die für eine Änderung erforderlich ist
+     * The minimum scroll distance in pixels required for a change
      * @default 8
      */
     tolerance?: number;
 
     /**
-     * Ob die Navigation am Ende der Seite angezeigt werden soll
+     * Whether the navigation should be shown at the end of the page
      * @default true
      */
     showAtBottom?: boolean;
 
     /**
-     * CSS-Klassennamen für verschiedene Zustände
+     * CSS class names for different states
      */
     classNames?: {
         /**
-         * Basis-Klassenname
+         * Base class name
          * @default 'scroll-nav'
          */
         base?: string;
 
         /**
-         * Klassenname für den fixierten Zustand
+         * Class name for the fixed state
          * @default 'scroll-nav--fixed'
          */
         fixed?: string;
 
         /**
-         * Klassenname für den ausgeblendeten Zustand
+         * Class name for the hidden state
          * @default 'scroll-nav--hidden'
          */
         hidden?: string;
@@ -49,22 +49,22 @@ export interface ScrollAwareNavClassNames {
 
 export interface ScrollAwareNavInstance {
     /**
-     * Initialisiert die Scroll-Überwachung
+     * Initialize scroll monitoring
      */
     init(): void;
 
     /**
-     * Setzt alle Zustände zurück
+     * Reset all states
      */
     reset(): void;
 
     /**
-     * Fixiert die Navigation
+     * Fix the navigation
      */
     fix(): void;
 
     /**
-     * Blendet die Navigation aus
+     * Hide the navigation
      */
     hide(): void;
 }
