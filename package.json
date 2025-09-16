@@ -1,0 +1,68 @@
+{
+    "name": "scroll-aware-nav",
+    "version": "1.0.0-beta.1",
+    "description": "Eine TypeScript-Library für intelligentes Scroll-Verhalten von Navigationselementen",
+    "type": "module",
+    "main": "./dist/scroll-aware-nav.umd.js",
+    "module": "./dist/scroll-aware-nav.es.js",
+    "types": "./dist/index.d.ts",
+    "style": "./dist/scroll-aware-nav.css",
+    "exports": {
+        ".": {
+            "import": "./dist/scroll-aware-nav.es.js",
+            "require": "./dist/scroll-aware-nav.umd.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./style.css": "./dist/scroll-aware-nav.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint src --ext .ts",
+        "format": "prettier --write \"src/**/*.{ts,css}\"",
+        "prepublishOnly": "bun run build",
+        "prepare": "bun run build"
+    },
+    "keywords": [
+        "scroll",
+        "navigation",
+        "header",
+        "typescript",
+        "frontend",
+        "ui",
+        "scroll-behavior"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "eslint": "^8.0.0",
+        "prettier": "^3.0.0",
+        "typescript": "^5.0.0",
+        "vite": "^5.0.0",
+        "vite-plugin-dts": "^3.0.0",
+        "@types/eslint": "^8.0.0",
+        "terser": "^5.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/username/scroll-aware-nav"
+    },
+    "bugs": {
+        "url": "https://github.com/username/scroll-aware-nav/issues"
+    },
+    "homepage": "https://github.com/username/scroll-aware-nav#readme",
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}
