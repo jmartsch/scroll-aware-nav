@@ -82,7 +82,7 @@
     "bugs": {
         "url": "https://github.com/jmartsch/scroll-reactive-nav/issues"
     },
-    "homepage": "https://github.com/jmartsch/scroll-reactive-nav#readme",
+    "homepage": "https://jmartsch.github.io/scroll-reactive-nav/",
     "sideEffects": false,
     "publishConfig": {
         "access": "public"
