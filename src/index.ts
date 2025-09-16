@@ -4,15 +4,19 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import type { ScrollAwareNavClassNames, ScrollAwareNavInstance, ScrollAwareNavOptions } from './types';
+import type {
+    ScrollAwareNavClassNames,
+    ScrollAwareNavInstance,
+    ScrollAwareNavOptions,
+} from './types';
 
 /**
  * Check if code is running in a browser environment
  */
 const isBrowser = (): boolean => {
-    return typeof window === 'object' &&
-        typeof document === 'object' &&
-        document instanceof Document;
+    return (
+        typeof window === 'object' && typeof document === 'object' && document instanceof Document
+    );
 };
 
 export class ScrollAwareNav implements ScrollAwareNavInstance {
@@ -46,7 +50,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
         this.classNames = {
             base: options.classNames?.base ?? 'scroll-nav',
             fixed: options.classNames?.fixed ?? 'scroll-nav--fixed',
-            hidden: options.classNames?.hidden ?? 'scroll-nav--hidden'
+            hidden: options.classNames?.hidden ?? 'scroll-nav--hidden',
         };
         this.scrollOptions = { passive: true };
         this.scrollLast = window.pageYOffset;
@@ -60,10 +64,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
         if (!isBrowser()) return false;
 
         try {
-            return !!(
-                'requestAnimationFrame' in window &&
-                'classList' in document.documentElement
-            );
+            return !!('requestAnimationFrame' in window && 'classList' in document.documentElement);
         } catch {
             return false;
         }
@@ -150,10 +151,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
 
             if (scrollCurrent <= 0) {
                 this.reset();
-            } else if (
-                this.showAtBottom &&
-                viewportHeight + scrollCurrent >= scrollHeight - 1
-            ) {
+            } else if (this.showAtBottom && viewportHeight + scrollCurrent >= scrollHeight - 1) {
                 this.fix();
             } else if (
                 scrollCurrent > this.startOffset &&
