@@ -33,9 +33,9 @@
         "test:coverage": "vitest run --coverage",
         "prepublishOnly": "bun run build",
         "prepare": "bun run build",
-        "release:patch": "npm version patch && npm publish --tag beta && git push --follow-tags",
-        "release:minor": "npm version minor && npm publish --tag beta && git push --follow-tags",
-        "release:major": "npm version major && npm publish --tag beta && git push --follow-tags",
+        "release:patch": "npm version patch && npm publish && git push --follow-tags",
+        "release:minor": "npm version minor && npm publish && git push --follow-tags",
+        "release:major": "npm version major && npm publish && git push --follow-tags",
         "release:prerelease": "npm version prerelease --preid=beta && npm publish --tag beta && git push --follow-tags",
         "release:final": "npm version 1.0.0 && npm publish && git push --follow-tags"
     },
