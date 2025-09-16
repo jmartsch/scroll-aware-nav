@@ -1,6 +1,6 @@
 {
     "name": "scroll-aware-nav",
-    "version": "1.0.0-beta.5",
+    "version": "1.0.0-beta.6",
     "description": "A lightweight TypeScript library for intelligent scroll-aware navigation behavior",
     "type": "module",
     "main": "./dist/scroll-aware-nav.umd.js",
