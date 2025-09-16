@@ -315,6 +315,47 @@
             background: rgba(34, 197, 94, 1);
         }
 
+        /* Tab System Styles */
+        .tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .tab-button.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         @media (max-width: 720px) {
             .header-inner {
                 flex-direction: column;
@@ -396,8 +437,7 @@
                 <article class="card">
                     <div class="badge">Lightweight</div>
                     <h3>Zero Dependencies</h3>
-                    <p>Pure TypeScript implementation with no external dependencies. Small bundle size for fast
-                        loading.</p>
+                    <p>Pure TypeScript implementation with no external dependencies. ES Module: <strong>3.92 KB</strong> (<strong>1.22 KB gzipped</strong>), UMD: <strong>2.67 KB</strong> (<strong>1.05 KB gzipped</strong>).</p>
                 </article>
             </div>
         </section>
@@ -461,6 +501,54 @@
                 <h2>Quick Implementation Guide</h2>
             </div>
             <div class="card">
+                <h3>Installation</h3>
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab(event, 'npm-tab')">npm</button>
+                    <button class="tab-button" onclick="switchTab(event, 'pnpm-tab')">pnpm</button>
+                    <button class="tab-button" onclick="switchTab(event, 'bun-tab')">bun</button>
+                </div>
+
+                <div id="npm-tab" class="tab-content active">
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy npm install command">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copy
+                        </button>
+                        <pre><code data-lang="bash" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">npm install scroll-aware-nav</code></pre>
+                    </div>
+                </div>
+
+                <div id="pnpm-tab" class="tab-content">
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy pnpm install command">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copy
+                        </button>
+                        <pre><code data-lang="bash" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">pnpm add scroll-aware-nav</code></pre>
+                    </div>
+                </div>
+
+                <div id="bun-tab" class="tab-content">
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy bun install command">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            Copy
+                        </button>
+                        <pre><code data-lang="bash" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">bun add scroll-aware-nav</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
                 <h3>Basic Setup</h3>
                 <div class="code-block">
                     <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
@@ -470,7 +558,7 @@
                         </svg>
                         Copy
                     </button>
-                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from './scroll-aware-nav';
+                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from 'scroll-aware-nav';
 
 // get your navigation element
 const header = document.getElementById('header');
@@ -568,6 +656,29 @@ const nav = new ScrollAwareNav(header, {
                     button.classList.remove('copied');
                 }, 2000);
             });
+        }
+
+        // Tab switching functionality
+        window.switchTab = function(event, tabId) {
+            // Remove active class from all tab buttons
+            const tabButtons = event.target.parentNode.querySelectorAll('.tab-button');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Hide all tab contents in this container
+            const tabContainer = event.target.closest('.card');
+            const tabContents = tabContainer.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            const activeTab = document.getElementById(tabId);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
         }
     </script>
 </body>
