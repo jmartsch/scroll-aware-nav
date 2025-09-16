@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 import packageJson from './package.json';
 
 const getPackageName = () => {
@@ -15,8 +16,8 @@ const getPackageNameCamelCase = () => {
 };
 
 const fileName = {
-    es: `${getPackageName()}.esm.js`,
-    cjs: `${getPackageName()}.cjs`,
+    es: `${getPackageName()}.es.js`,
+    cjs: `${getPackageName()}.umd.js`,
     iife: `${getPackageName()}.iife.js`,
 };
 
@@ -24,19 +25,31 @@ const formats = Object.keys(fileName) as Array<keyof typeof fileName>;
 
 export default defineConfig({
     base: "./",
+    plugins: [
+        dts({
+            insertTypesEntry: true,
+            rollupTypes: true,
+        }),
+    ],
     build: {
         outDir: "./dist",
         lib: {
             entry: path.resolve(__dirname, "src/index.ts"),
             name: getPackageNameCamelCase(),
-            formats,
-            fileName: format => fileName[format],
+            formats: ['es', 'umd'],
+            fileName: (format) => `${getPackageName()}.${format}.js`,
         },
         minify: 'terser',
         terserOptions: {
             keep_classnames: true,
             keep_fnames: true,
-        }
+        },
+        rollupOptions: {
+            external: [],
+            output: {
+                globals: {},
+            },
+        },
     },
     resolve: {
         alias: [

@@ -1,7 +1,7 @@
 {
     "name": "scroll-aware-nav",
     "version": "1.0.0-beta.1",
-    "description": "Eine TypeScript-Library für intelligentes Scroll-Verhalten von Navigationselementen",
+    "description": "A lightweight TypeScript library for intelligent scroll-aware navigation behavior",
     "type": "module",
     "main": "./dist/scroll-aware-nav.umd.js",
     "module": "./dist/scroll-aware-nav.es.js",
@@ -31,12 +31,23 @@
         "scroll",
         "navigation",
         "header",
+        "navbar",
         "typescript",
         "frontend",
         "ui",
-        "scroll-behavior"
+        "scroll-behavior",
+        "hide-show",
+        "smart-header",
+        "headroom",
+        "scroll-aware",
+        "mobile-first",
+        "performance"
     ],
-    "author": "",
+    "author": {
+        "name": "Jens Martsch",
+        "email": "jmartsch@gmail.com",
+        "url": "https://github.com/jmartsch"
+    },
     "license": "MIT",
     "devDependencies": {
         "@types/node": "^20.0.0",
@@ -52,12 +63,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/username/scroll-aware-nav"
+        "url": "https://github.com/jmartsch/scroll-aware-nav"
     },
     "bugs": {
-        "url": "https://github.com/username/scroll-aware-nav/issues"
+        "url": "https://github.com/jmartsch/scroll-aware-nav/issues"
     },
-    "homepage": "https://github.com/username/scroll-aware-nav#readme",
+    "homepage": "https://github.com/jmartsch/scroll-aware-nav#readme",
     "sideEffects": false,
     "publishConfig": {
         "access": "public"
