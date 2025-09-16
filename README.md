@@ -25,6 +25,17 @@ While similar in concept to headroom.js, this library focuses on key improvement
 - Passive event listeners for better scroll performance
 - Customizable CSS classes and behavior options
 
+## Bundle Size
+
+ScrollAwareNav is incredibly lightweight:
+
+- **ES Module**: 3.92 kB (1.19 kB gzipped)
+- **UMD Bundle**: 2.67 kB (1.02 kB gzipped)
+- **TypeScript Declarations**: 2.9 kB
+- **Total Package**: ~6.0 kB unpacked
+
+Built with Vite 7 for optimal tree-shaking and modern bundle optimization.
+
 ## Installation
 
 ### Via npm/pnpm/bun

@@ -9,9 +9,9 @@
     "style": "./dist/scroll-aware-nav.css",
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "import": "./dist/scroll-aware-nav.es.js",
-            "require": "./dist/scroll-aware-nav.umd.js",
-            "types": "./dist/index.d.ts"
+            "require": "./dist/scroll-aware-nav.umd.js"
         },
         "./style.css": "./dist/scroll-aware-nav.css"
     },
@@ -70,7 +70,7 @@
         "prettier": "^3.6.2",
         "terser": "^5.44.0",
         "typescript": "^5.9.2",
-        "vite": "^5.4.20",
+        "vite": "^7.1.5",
         "vite-plugin-dts": "^3.9.1",
         "vitest": "^3.2.4"
     },

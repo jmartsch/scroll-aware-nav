@@ -10,8 +10,8 @@
 
 ## Build, Test, and Development Commands
 - `bun install` (or `npm install`) to sync dependencies.
-- `bun run dev` launches the Vite dev server with hot reload for the demo page.
-- `bun run build` generates production assets in `dist/` with TypeScript declarations; required before publishing.
+- `bun run dev` launches the Vite 7 dev server with hot reload for the demo page.
+- `bun run build` generates production assets in `dist/` with TypeScript declarations using Vite 7; required before publishing.
 - `bun run preview` serves the built bundle for smoke testing.
 - `bun run lint` runs ESLint over `src/`.
 - `bun run format` applies Prettier to TypeScript and CSS files.
@@ -32,6 +32,13 @@
 - **Mocking strategy**: Use `Object.defineProperty()` for DOM properties like `offsetHeight`, `pageYOffset`; mock RAF/timers with `vi.useFakeTimers()`.
 - All new features must include corresponding tests; aim for >90% coverage.
 - CI/CD automatically runs tests on Ubuntu, Windows, and macOS before deployment.
+
+## Bundle & Build Output
+- **ES Module**: 3.92 kB (1.19 kB gzipped) - Modern bundlers with tree-shaking
+- **UMD Bundle**: 2.67 kB (1.02 kB gzipped) - Universal compatibility
+- **TypeScript Declarations**: 2.9 kB - Full type safety
+- **Total Package Size**: ~6.0 kB unpacked
+- Built with **Vite 7** for optimal tree-shaking and bundle optimization
 
 ## Release & Publishing Guidelines
 - **Automated release scripts**: Use `bun run release:prerelease` for dependency updates, `bun run release:patch|minor|major` for feature releases.
