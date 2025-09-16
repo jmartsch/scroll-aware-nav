@@ -57,7 +57,7 @@
         "email": "jmartsch@gmail.com",
         "url": "https://github.com/jmartsch"
     },
-    "license": "MIT",
+    "license": "MPL-2.0",
     "devDependencies": {
         "@types/eslint": "^8.56.12",
         "@types/node": "^20.19.15",
