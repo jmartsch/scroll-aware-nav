@@ -364,8 +364,8 @@
                 <h2>Intelligent Navigation that Responds to User Behavior</h2>
             </div>
             <p>ScrollAwareNav is a lightweight TypeScript utility that creates smart, responsive navigation behavior.
-                It automatically hides the navigation when users scroll down and shows it when they scroll up, providing
-                an enhanced user experience for modern web applications.</p>
+               It automatically hides the navigation when users scroll down and shows it when they scroll up, providing
+               an enhanced user experience for modern web applications.</p>
             <a class="cta" href="#usage">Get Started</a>
         </section>
 
@@ -410,8 +410,7 @@
             <div class="grid">
                 <article class="card">
                     <h3>ScrollAwareNavOptions</h3>
-                    <div
-                        style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <div style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
                         <div><strong>startOffset?:</strong> number</div>
                         <div style="color: var(--text-secondary); font-size: 0.9em;">Pixel offset to start fixing
                             navigation (default: element.offsetHeight)</div>
@@ -431,8 +430,7 @@
                 </article>
                 <article class="card">
                     <h3>Public Methods</h3>
-                    <div
-                        style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <div style="font-family: monospace; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
                         <div><strong>init():</strong> void</div>
                         <div style="color: var(--text-secondary); font-size: 0.9em;">Initialize scroll monitoring</div>
                         <br>
@@ -461,6 +459,19 @@
                 <h2>Quick Implementation Guide</h2>
             </div>
             <div class="card">
+                <h3>NPM Installation</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <pre><code data-lang="bash" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">npm install scroll-aware-nav@beta</code></pre>
+                </div>
+            </div>
+            <div class="card">
                 <h3>Basic Setup</h3>
                 <div class="code-block">
                     <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy code">
@@ -470,7 +481,7 @@
                         </svg>
                         Copy
                     </button>
-                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from './scroll-aware-nav';
+                    <pre><code data-lang="javascript" style="display: block; background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; margin: 0; overflow-x: auto; color: #f8fafc;">import { ScrollAwareNav } from 'scroll-aware-nav';
 
 // get your navigation element
 const header = document.getElementById('header');
@@ -521,11 +532,10 @@ const nav = new ScrollAwareNav(header, {
                 <h2>Get in Touch</h2>
             </div>
             <p>Questions about implementation? Need custom features? Feel free to reach out for support or collaboration
-                on your next project with ScrollAwareNav.</p>
+               on your next project with ScrollAwareNav.</p>
             <div class="contact-list">
-                <div><strong>GitHub:</strong> <a href="#"
-                        style="color: var(--accent);">github.com/jmartsch/scroll-aware-nav</a></div>
-                <div><strong>Issues:</strong> Report bugs and request features</div>
+                <div><strong>GitHub:</strong> <a href="https://github.com/jmartsch/scroll-aware-nav" style="color: var(--accent);">github.com/jmartsch/scroll-aware-nav</a></div>
+                <div><strong>NPM:</strong> <a href="https://www.npmjs.com/package/scroll-aware-nav" style="color: var(--accent);">npmjs.com/package/scroll-aware-nav</a></div>
                 <div><strong>License:</strong> MIT - Free for personal and commercial use</div>
             </div>
         </section>
@@ -533,14 +543,14 @@ const nav = new ScrollAwareNav(header, {
     </main>
 
     <script type="module">
-        import { ScrollAwareNav } from './src/index.ts';
+        // Import from built files for GitHub Pages
+        import { ScrollAwareNav } from './dist/scroll-aware-nav.es.js';
 
         // Initialize the navigation
         const header = document.getElementById('header');
         const nav = new ScrollAwareNav(header, {
             tolerance: 10,
             showAtBottom: true,
-
         });
 
         // Initialize Shiki highlighting

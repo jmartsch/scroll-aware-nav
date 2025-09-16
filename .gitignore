@@ -33,3 +33,9 @@ yarn-error.log*
 
 # Test coverage
 coverage
+
+# NPM packages
+*.tgz
+
+# VS Code upload config
+.vscode-upload.json
