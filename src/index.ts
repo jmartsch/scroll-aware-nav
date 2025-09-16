@@ -1,4 +1,4 @@
-import type { ScrollAwareNavOptions, ScrollAwareNavClassNames, ScrollAwareNavInstance } from './types';
+import type { ScrollAwareNavClassNames, ScrollAwareNavInstance, ScrollAwareNavOptions } from './types';
 
 /**
  * Check if code is running in a browser environment
@@ -177,7 +177,7 @@ export class ScrollAwareNav implements ScrollAwareNavInstance {
 }
 
 // Export types for better DX
-export type { ScrollAwareNavOptions, ScrollAwareNavClassNames, ScrollAwareNavInstance };
+export type { ScrollAwareNavClassNames, ScrollAwareNavInstance, ScrollAwareNavOptions };
 
 // Default export for easier usage
 export default ScrollAwareNav;
