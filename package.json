@@ -1,6 +1,6 @@
 {
     "name": "scroll-reactive-nav",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "A lightweight TypeScript library for intelligent scroll-aware navigation behavior",
     "type": "module",
     "main": "./dist/scroll-reactive-nav.umd.js",
