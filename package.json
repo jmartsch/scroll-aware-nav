@@ -3,17 +3,17 @@
     "version": "1.0.0-beta.7",
     "description": "A lightweight TypeScript library for intelligent scroll-aware navigation behavior",
     "type": "module",
-    "main": "./dist/scroll-aware-nav.umd.js",
-    "module": "./dist/scroll-aware-nav.es.js",
+    "main": "./dist/scroll-reactive-nav.umd.js",
+    "module": "./dist/scroll-reactive-nav.es.js",
     "types": "./dist/index.d.ts",
-    "style": "./dist/scroll-aware-nav.css",
+    "style": "./dist/scroll-reactive-nav.css",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "import": "./dist/scroll-aware-nav.es.js",
-            "require": "./dist/scroll-aware-nav.umd.js"
+            "import": "./dist/scroll-reactive-nav.es.js",
+            "require": "./dist/scroll-reactive-nav.umd.js"
         },
-        "./style.css": "./dist/scroll-aware-nav.css"
+        "./style.css": "./dist/scroll-reactive-nav.css"
     },
     "files": [
         "dist"
