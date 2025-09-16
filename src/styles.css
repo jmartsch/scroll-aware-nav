@@ -1,6 +1,4 @@
-html {
-    scroll-behavior: smooth;
-}
+
 
 .scroll-nav {
     transition: transform 0.3s ease;
