@@ -1,4 +1,4 @@
-# Scroll Aware Navigation
+# Scroll Reactive Navigation
 
 **Next-generation smart header behavior for modern web experiences.**
 
