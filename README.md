@@ -41,11 +41,11 @@ Built with Vite 7 for optimal tree-shaking and modern bundle optimization.
 ### Via npm/pnpm/bun
 
 ```bash
-npm install scroll-aware-nav
+npm install scroll-reactive-nav
 # oder
-pnpm add scroll-aware-nav
+pnpm add scroll-reactive-nav
 # oder
-bun add scroll-aware-nav
+bun add scroll-reactive-nav
 ```
 
 ### Via ES6 Module (Development)
@@ -68,7 +68,7 @@ bun add scroll-aware-nav
 </header>
 
 <script type="module">
-  import { ScrollAwareNav } from 'scroll-aware-nav';
+  import { ScrollAwareNav } from 'scroll-reactive-nav';
 
   const header = document.getElementById('header');
   const nav = new ScrollAwareNav(header);
@@ -78,7 +78,7 @@ bun add scroll-aware-nav
 ## Advanced Configuration
 
 ```typescript
-import { ScrollAwareNav } from 'scroll-aware-nav';
+import { ScrollAwareNav } from 'scroll-reactive-nav';
 
 // Select your header element
 const header = document.querySelector('.header');
@@ -254,7 +254,7 @@ import {
   ScrollAwareNavOptions,
   ScrollAwareNavClassNames,
   ScrollAwareNavInstance
-} from 'scroll-aware-nav';
+} from 'scroll-reactive-nav';
 ```
 
 ## Performance

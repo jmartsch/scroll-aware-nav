@@ -1,5 +1,5 @@
 {
-    "name": "scroll-aware-nav",
+    "name": "scroll-reactive-nav",
     "version": "1.0.0-beta.7",
     "description": "A lightweight TypeScript library for intelligent scroll-aware navigation behavior",
     "type": "module",
@@ -77,12 +77,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jmartsch/scroll-aware-nav.git"
+        "url": "git+https://github.com/jmartsch/scroll-reactive-nav.git"
     },
     "bugs": {
-        "url": "https://github.com/jmartsch/scroll-aware-nav/issues"
+        "url": "https://github.com/jmartsch/scroll-reactive-nav/issues"
     },
-    "homepage": "https://github.com/jmartsch/scroll-aware-nav#readme",
+    "homepage": "https://github.com/jmartsch/scroll-reactive-nav#readme",
     "sideEffects": false,
     "publishConfig": {
         "access": "public"
